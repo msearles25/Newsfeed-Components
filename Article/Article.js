@@ -145,20 +145,22 @@ function createArticle(title, date, paraOne, paraTwo, paraThree) {
   const contentOne = document.createElement('p');
   const contentTwo = document.createElement('p');
   const contentThree = document.createElement('p');
+  const buttonPanel = document.createElement('span');
   const buttonClose = document.createElement('span');
   const buttonOpen = document.createElement('span');
 
-  article.append(articleTitle);
-  article.append(articleDate);
-  article.append(contentOne);
-  article.append(contentTwo);
-  article.append(contentThree);
-  article.append(buttonOpen);
-  article.append(buttonClose);
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(contentOne);
+  article.appendChild(contentTwo);
+  article.appendChild(contentThree);
+  article.appendChild(buttonPanel);
+  buttonPanel.appendChild(buttonOpen);
+  buttonPanel.appendChild(buttonClose);
 
   article.classList.add('article');
   articleDate.classList.add('date');
-  buttonClose.classList.add('expandButton')
+  buttonClose.classList.add('expandButton');
 
   articleTitle.textContent = title;
   articleDate.textContent = date;
@@ -168,9 +170,9 @@ function createArticle(title, date, paraOne, paraTwo, paraThree) {
   buttonOpen.textContent = '\u25B2';
   buttonClose.textContent = '\u25BC';
 
-  buttonClose.addEventListener('click', () => {
-    // buttonClose.classList.toggle('expandButton');
-    // buttonOpen.classList.toggle('expandButton');
+  buttonPanel.addEventListener('click', () => {
+    buttonClose.classList.toggle('expandButton');
+    buttonOpen.classList.toggle('expandButton');
     article.classList.toggle('article-open');
   });
 
