@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Article',
+    date: 'December 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -98,7 +114,7 @@ const data = [
 
     <span class='expandButton'></span>
   </div>
-
+  
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
@@ -112,3 +128,53 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articlesDiv = document.querySelector('.articles');
+
+data.map(element => {
+  const e = articlesDiv.append(createArticle(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+
+  return e;
+});
+
+function createArticle(title, date, paraOne, paraTwo, paraThree) {
+  
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const contentOne = document.createElement('p');
+  const contentTwo = document.createElement('p');
+  const contentThree = document.createElement('p');
+  const buttonPanel = document.createElement('span');
+  const buttonClose = document.createElement('span');
+  const buttonOpen = document.createElement('span');
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(contentOne);
+  article.appendChild(contentTwo);
+  article.appendChild(contentThree);
+  article.appendChild(buttonPanel);
+  buttonPanel.appendChild(buttonOpen);
+  buttonPanel.appendChild(buttonClose);
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  buttonClose.classList.add('expandButton');
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  contentOne.textContent = paraOne;
+  contentTwo.textContent = paraTwo;
+  contentThree.textContent = paraThree;
+  buttonOpen.textContent = '\u25B2';
+  buttonClose.textContent = '\u25BC';
+
+  buttonPanel.addEventListener('click', () => {
+    buttonClose.classList.toggle('expandButton');
+    buttonOpen.classList.toggle('expandButton');
+    article.classList.toggle('article-open');
+  });
+
+  return article;
+}
